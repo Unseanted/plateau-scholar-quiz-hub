@@ -1,0 +1,57 @@
+
+export type LGA = 
+  | "Barkin Ladi"
+  | "Bassa"
+  | "Bokkos"
+  | "Jos East"
+  | "Jos North"
+  | "Jos South"
+  | "Kanam"
+  | "Kanke"
+  | "Langtang North"
+  | "Langtang South"
+  | "Mangu"
+  | "Mikang"
+  | "Pankshin"
+  | "Qua'an Pan"
+  | "Riyom"
+  | "Shendam"
+  | "Wase";
+
+export interface QuizQuestion {
+  id: number;
+  question: string;
+  options: string[];
+  correctAnswer: string;
+  explanation?: string;
+}
+
+export interface ApplicationForm {
+  id?: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  gender: "male" | "female" | "other";
+  dateOfBirth: Date | string;
+  address: string;
+  lga: LGA;
+  institution: string;
+  course: string;
+  level: string;
+  matricNumber: string;
+  indigeneFormUrl?: string;
+  admissionLetterUrl?: string;
+  passportPhotoUrl?: string;
+  quizScore?: number;
+  status: "pending" | "approved" | "rejected";
+  createdAt: Date | string;
+  updatedAt: Date | string;
+}
+
+export interface User {
+  id: string;
+  email: string;
+  role: "admin" | "manager" | "viewer";
+  name: string;
+  createdAt: Date | string;
+}

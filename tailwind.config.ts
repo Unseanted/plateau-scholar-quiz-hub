@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,17 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Plateau scholarship colors
+				plateau: {
+					green: '#4CAF50',
+					yellow: '#FFD54F',
+					lightGreen: '#8BC34A',
+					lightYellow: '#FFF9C4',
 				}
+			},
+			backgroundImage: {
+				'gradient-plateau': 'linear-gradient(135deg, #FFF9C4 0%, #8BC34A 100%)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
