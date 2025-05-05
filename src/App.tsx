@@ -16,7 +16,6 @@ import AdminApplications from "./pages/admin/Applications";
 import AdminUsers from "./pages/admin/Users";
 import AdminSettings from "./pages/admin/Settings";
 import About from "./components/layout/About";
-import { Contact } from "lucide-react";
 
 const queryClient = new QueryClient();
 
@@ -30,7 +29,6 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/application" element={<Application />} />
           <Route path="/application/success" element={<ApplicationSuccess />} />
           <Route path="/admin" element={<AdminLogin />} />

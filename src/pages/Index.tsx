@@ -1,6 +1,6 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { FaXTwitter, FaFacebookF, FaTiktok } from "react-icons/fa6";
 import {
   Card,
   CardContent,
@@ -23,8 +23,8 @@ const Index = () => {
                 Plateau State Scholarship Program
               </h1>
               <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                Supporting the education and future of Plateau State students through
-                comprehensive scholarships and financial aid.
+                Supporting the education and future of Plateau State students
+                through comprehensive scholarships and financial aid.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link to="/quiz">
@@ -55,7 +55,9 @@ const Index = () => {
                           <CheckIcon className="h-4 w-4 text-primary" />
                         </div>
                         <div>
-                          <p className="font-medium">Take the Eligibility Quiz</p>
+                          <p className="font-medium">
+                            Take the Eligibility Quiz
+                          </p>
                           <p className="text-sm text-muted-foreground">
                             Complete a short quiz to see if you qualify
                           </p>
@@ -79,7 +81,8 @@ const Index = () => {
                         <div>
                           <p className="font-medium">Upload Documents</p>
                           <p className="text-sm text-muted-foreground">
-                            Submit your indigene form, admission letter, and passport photo
+                            Submit your indigene form, admission letter, and
+                            passport photo
                           </p>
                         </div>
                       </li>
@@ -104,9 +107,9 @@ const Index = () => {
               About The Scholarship
             </h2>
             <p className="mt-4 max-w-[700px] text-muted-foreground md:text-xl">
-              The Plateau State Scholarship is designed to support indigenes of Plateau
-              State in their educational pursuits, providing financial assistance to
-              deserving students.
+              The Plateau State Scholarship is designed to support indigenes of
+              Plateau State in their educational pursuits, providing financial
+              assistance to deserving students.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
@@ -116,9 +119,9 @@ const Index = () => {
               </CardHeader>
               <CardContent>
                 <p>
-                  To be eligible, you must be an indigene of Plateau State, currently
-                  enrolled in a recognized educational institution. You must provide proof
-                  of indigeneship and admission.
+                  To be eligible, you must be an indigene of Plateau State,
+                  currently enrolled in a recognized educational institution.
+                  You must provide proof of indigeneship and admission.
                 </p>
               </CardContent>
             </Card>
@@ -128,8 +131,9 @@ const Index = () => {
               </CardHeader>
               <CardContent>
                 <p>
-                  The scholarship covers tuition fees, study materials, and a monthly
-                  stipend depending on your level of study and the institution you attend.
+                  The scholarship covers tuition fees, study materials, and a
+                  monthly stipend depending on your level of study and the
+                  institution you attend.
                 </p>
               </CardContent>
             </Card>
@@ -139,8 +143,9 @@ const Index = () => {
               </CardHeader>
               <CardContent>
                 <p>
-                  Scholarships are awarded for the duration of your program, subject to
-                  satisfactory academic performance and annual renewal application.
+                  Scholarships are awarded for the duration of your program,
+                  subject to satisfactory academic performance and annual
+                  renewal application.
                 </p>
               </CardContent>
             </Card>
@@ -148,14 +153,18 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-white rounded-lg shadow-sm" id="contact">
+      <section
+        className="py-12 md:py-16 bg-white rounded-lg shadow-sm"
+        id="contact"
+      >
         <div className="container px-4 md:px-6">
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
               Contact Us
             </h2>
             <p className="mt-4 max-w-[700px] text-muted-foreground md:text-xl">
-              Have questions about the scholarship? Reach out to our support team.
+              Have questions about the scholarship? Reach out to our support
+              team.
             </p>
             <div className="mt-8 grid gap-4 w-full max-w-md">
               <div className="flex items-center gap-2">
@@ -216,6 +225,11 @@ const Index = () => {
                   </svg>
                 </div>
                 <span>Plateau State Scholarship Board, Jos, Nigeria</span>
+              </div>
+              <div className="flex justify-center items-center gap-4 mt-4 text-black">
+                <FaXTwitter className="text-3xl" />
+                <FaFacebookF className="text-3xl" />
+                <FaTiktok className="text-3xl" />
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaXTwitter, FaFacebookF, FaTiktok } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -52,6 +53,11 @@ const Footer = () => {
               <p className="mt-2">Email: info@plateauscholarship.gov.ng</p>
               <p>Phone: +234 123 456 7890</p>
             </address>
+            <div className="flex items-center gap-4 mt-4 text-black">
+            <FaXTwitter  className="text-3xl"/>
+            <FaFacebookF className="text-3xl" />
+            <FaTiktok  className="text-3xl"/>
+            </div>
           </div>
         </div>
         <div className="border-t mt-8 pt-4 text-center text-sm text-muted-foreground">
