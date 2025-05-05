@@ -227,9 +227,27 @@ const Index = () => {
                 <span>Plateau State Scholarship Board, Jos, Nigeria</span>
               </div>
               <div className="flex justify-center items-center gap-4 mt-4 text-black">
-                <FaXTwitter className="text-3xl" />
-                <FaFacebookF className="text-3xl" />
-                <FaTiktok className="text-3xl" />
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaXTwitter className="text-3xl hover:text-blue-500 transition-colors" />
+                </a>
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaFacebookF className="text-3xl hover:text-blue-600 transition-colors" />
+                </a>
+                <a
+                  href="https://tiktok.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaTiktok className="text-3xl hover:text-black transition-colors" />
+                </a>
               </div>
             </div>
           </div>

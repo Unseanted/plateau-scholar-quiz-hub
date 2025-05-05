@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaXTwitter, FaFacebookF, FaTiktok } from "react-icons/fa6";
@@ -11,7 +10,8 @@ const Footer = () => {
           <div>
             <h3 className="font-bold text-lg mb-4">Plateau Scholarship</h3>
             <p className="text-sm text-muted-foreground">
-              Supporting the educational aspirations of students from Plateau State, Nigeria.
+              Supporting the educational aspirations of students from Plateau
+              State, Nigeria.
             </p>
           </div>
           <div>
@@ -53,15 +53,36 @@ const Footer = () => {
               <p className="mt-2">Email: info@plateauscholarship.gov.ng</p>
               <p>Phone: +234 123 456 7890</p>
             </address>
-            <div className="flex items-center gap-4 mt-4 text-black">
-            <FaXTwitter  className="text-3xl"/>
-            <FaFacebookF className="text-3xl" />
-            <FaTiktok  className="text-3xl"/>
+            <div className="flex justify-center items-center gap-4 mt-4 text-black">
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaXTwitter className="text-3xl hover:text-blue-500 transition-colors" />
+              </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaFacebookF className="text-3xl hover:text-blue-600 transition-colors" />
+              </a>
+              <a
+                href="https://tiktok.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaTiktok className="text-3xl hover:text-black transition-colors" />
+              </a>
             </div>
           </div>
         </div>
         <div className="border-t mt-8 pt-4 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Plateau Scholarship Board. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} Plateau Scholarship Board. All
+            rights reserved.
+          </p>
         </div>
       </div>
     </footer>
