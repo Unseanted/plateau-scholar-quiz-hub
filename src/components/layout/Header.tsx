@@ -19,10 +19,10 @@ const Header = () => {
           <Link to="/quiz" className="text-sm font-medium hover:text-primary">
             Eligibility Quiz
           </Link>
-          <Link to="/#about" className="text-sm font-medium hover:text-primary">
+          <Link to="/about" className="text-sm font-medium hover:text-primary">
             About
           </Link>
-          <Link to="/#contact" className="text-sm font-medium hover:text-primary">
+          <Link to="/contact" className="text-sm font-medium hover:text-primary">
             Contact
           </Link>
         </nav>
