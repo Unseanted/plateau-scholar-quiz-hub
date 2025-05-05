@@ -22,9 +22,9 @@ const Header = () => {
           <Link to="/about" className="text-sm font-medium hover:text-primary">
             About
           </Link>
-          <Link to="/contact" className="text-sm font-medium hover:text-primary">
+          {/* <Link to="/contact" className="text-sm font-medium hover:text-primary">
             Contact
-          </Link>
+          </Link> */}
         </nav>
         <div className="flex items-center gap-4">
           <Link to="/quiz">
