@@ -32,7 +32,7 @@ const Index = () => {
                     Check Eligibility
                   </Button>
                 </Link>
-                <Link to="/#about">
+                <Link to="/about">
                   <Button size="lg" variant="outline" className="font-medium">
                     Learn More
                   </Button>
