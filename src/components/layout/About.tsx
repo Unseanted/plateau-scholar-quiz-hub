@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 
 const ImageSlider = () => {
   return (
-    <div className="relative py-24 px-6 bg-gradient-to-r from-amber-200 to-green-100 text-gray-300">
+    <div className="relative py-24 px-6 bg-gradient-to-r from-amber-200 to-slate-50 text-gray-300">
       {/* Top-right Button */}
       <div className="absolute top-4 right-4">
         <Link to="/">
