@@ -1,10 +1,20 @@
 # Plateau State Students Scholarship Platform
+The Plateau Scholarship Program is more than just financial aid—it is
+a lifeline for students striving to achieve their dreams of higher
+education. Designed with deep concern for the future of Plateau
+State's youth, this program aims to ease the burden of tuition fees,
+accommodation, and academic expenses, ensuring that no deserving
+student is left behind due to financial constraints. Through this
+initiative, the Plateau State Government and educational foundations
+stand in unwavering support of students, empowering them to focus on
+their studies, build their futures, and create a lasting impact on
+their communities.
 
 This is a **Next.js**-based web application designed to help Plateau State students apply for scholarships, verify their eligibility, and track disbursements.
 
 ## Features
 - **Student Registration**: Users can sign up and apply for scholarships.
-- **Sliding Images on Welcome Page**: Showcases student success stories.
+- **Sliding Images on About Page**: Showcases student success stories.
 - **Authentication & Role-Based Access Control (RBAC)**:
   - Admin, Reviewer, and Finance Officer roles.
   - JWT authentication with **Multi-Factor Authentication (MFA)** for admins.
@@ -16,7 +26,7 @@ This is a **Next.js**-based web application designed to help Plateau State stude
 ## Tech Stack
 - **Frontend**: Next.js, Tailwind CSS, ShadCN, Swiper.js
 - **Backend**: Node.js, Express.js
-- **Database**: PostgreSQL or MongoDB
+- **Database**: MongoDB
 - **Authentication**: JWT, MFA (Google Authenticator + Email OTP)
 - **Payments**: Paystack API
 
@@ -27,7 +37,7 @@ This is a **Next.js**-based web application designed to help Plateau State stude
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/your-username/plateau-scholar-quiz/plateau-scholarship-platform.git
+git clone https://github.com/your-username/plateau-scholar-quiz/plateau-quiz-hub.git
 cd plateau-scholarship-platform
 ```
 
