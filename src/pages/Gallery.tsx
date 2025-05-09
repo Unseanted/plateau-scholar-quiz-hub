@@ -104,12 +104,12 @@ const Gallery = () => {
               {galleryImages.map((image) => (
                 <CarouselItem key={image.id} className="md:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
-                    <Card>
-                      <div className="h-56 overflow-hidden rounded-t-lg">
+                    <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                      <div className="h-64 overflow-hidden">
                         <img
                           src={image.imageUrl}
                           alt={image.title}
-                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                          className="w-full h-full object-cover transition-all duration-500 hover:scale-110 transform-gpu"
                         />
                       </div>
                       <CardHeader className="p-4">
@@ -121,7 +121,7 @@ const Gallery = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center mt-6">
               <CarouselPrevious className="relative static mr-2 translate-y-0" />
               <CarouselNext className="relative static ml-2 translate-y-0" />
             </div>
@@ -133,10 +133,10 @@ const Gallery = () => {
           <h2 className="text-2xl font-semibold mb-6">Success Stories</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {testimonials.map((testimonial) => (
-              <Card key={testimonial.id} className="bg-white/50 backdrop-blur-sm border border-accent/20">
+              <Card key={testimonial.id} className="bg-white/50 backdrop-blur-sm border border-accent/20 shadow-md hover:shadow-lg transition-shadow duration-300">
                 <CardContent className="pt-6">
                   <div className="flex items-start space-x-4">
-                    <Avatar className="h-12 w-12 border-2 border-primary">
+                    <Avatar className="h-12 w-12 border-2 border-primary shadow-sm">
                       <img src={testimonial.avatar} alt={testimonial.name} />
                     </Avatar>
                     <div>
