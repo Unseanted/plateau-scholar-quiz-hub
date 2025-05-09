@@ -16,6 +16,9 @@ const Header = () => {
           <Link to="/" className="text-sm font-medium hover:text-primary">
             Home
           </Link>
+          <Link to="/gallery" className="text-sm font-medium hover:text-primary">
+            Gallery
+          </Link>
           <Link to="/quiz" className="text-sm font-medium hover:text-primary">
             Eligibility Quiz
           </Link>
