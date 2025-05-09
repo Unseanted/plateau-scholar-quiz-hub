@@ -109,7 +109,7 @@ const Index = () => {
             <p className="mt-4 max-w-[700px] text-muted-foreground md:text-xl">
               The Plateau State Scholarship is designed to support indigenes of
               Plateau State in their educational pursuits, providing financial
-              assistance to deserving students.
+              assistance to deserving and eligible students.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
@@ -121,7 +121,7 @@ const Index = () => {
                 <p>
                   To be eligible, you must be an indigene of Plateau State,
                   currently enrolled in a recognized educational institution.
-                  You must provide proof of indigeneship and admission.
+                  You must provide proof of indigeneship and admission letter with a picture for identification.
                 </p>
               </CardContent>
             </Card>
@@ -184,7 +184,7 @@ const Index = () => {
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                   </svg>
                 </div>
-                <span>+234 123 456 7890</span>
+                <span>+234 803 3607 3557</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="bg-primary/20 p-2 rounded-full">
