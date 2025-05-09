@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -44,7 +45,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { lgaList } from "@/data/quizQuestions";
 import { submitApplication, uploadFile } from "@/services/api";
-import { ApplicationForm } from "@/types";
+import { ApplicationForm, LGA } from "@/types";
 
 const formSchema = z.object({
   fullName: z.string().min(3, "Full name must be at least 3 characters"),
@@ -125,8 +126,19 @@ const Application = () => {
           uploadFile(passportPhoto),
         ]);
 
+      // Create application data with all required fields explicitly set
       const applicationData: ApplicationForm = {
-        ...data,
+        fullName: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        gender: data.gender,
+        dateOfBirth: data.dateOfBirth,
+        address: data.address,
+        lga: data.lga as LGA,
+        institution: data.institution,
+        course: data.course,
+        level: data.level,
+        matricNumber: data.matricNumber,
         indigeneFormUrl,
         admissionLetterUrl,
         passportPhotoUrl,
