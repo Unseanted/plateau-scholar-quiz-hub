@@ -1,4 +1,3 @@
-
 export type LGA = 
   | "Barkin Ladi"
   | "Bassa"
@@ -51,9 +50,10 @@ export interface ApplicationForm {
 export interface User {
   id: string;
   email: string;
-  role: "admin" | "manager" | "viewer";
   name: string;
-  createdAt: Date | string;
+  role: "admin" | "manager" | "viewer";
+  authProvider?: "email" | "google"; // Added authProvider field
+  createdAt: string;
 }
 
 export interface StudentProfile extends ApplicationForm {

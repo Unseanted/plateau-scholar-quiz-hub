@@ -1,4 +1,3 @@
-
 import { ApplicationForm, User } from "../types";
 
 // Mock API functions that would be replaced with actual API calls
@@ -96,6 +95,29 @@ export const loginUser = async (email: string, password: string): Promise<{ succ
   }
   
   return { success: true, user };
+};
+
+// Google Auth API
+export const loginWithGoogle = async (): Promise<{ success: boolean; user?: User }> => {
+  await delay(800);
+  
+  // In a real app, this would handle Google OAuth flow
+  // For mock purposes, we'll create a user with Google info
+  const googleUser: User = {
+    id: `google_${Math.floor(Math.random() * 1000000)}`,
+    email: `user${Math.floor(Math.random() * 10000)}@gmail.com`,
+    name: `Google User ${Math.floor(Math.random() * 1000)}`,
+    role: "viewer",
+    authProvider: "google",
+    createdAt: new Date().toISOString(),
+  };
+  
+  // Get existing users or create new array
+  const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+  existingUsers.push(googleUser);
+  localStorage.setItem("users", JSON.stringify(existingUsers));
+  
+  return { success: true, user: googleUser };
 };
 
 // Admin Auth API
