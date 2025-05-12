@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Link } from "react-router-dom";
 import MainLayout from "./MainLayout";
+import { Analytics } from "@vercel/analytics/next";
 
 import "swiper/css";
 import "swiper/css/pagination";

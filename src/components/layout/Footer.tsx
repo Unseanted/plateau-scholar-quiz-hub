@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaXTwitter, FaFacebookF, FaTiktok } from "react-icons/fa6";
+import { Analytics } from "@vercel/analytics/next";
 
 const Footer = () => {
   return (
