@@ -48,7 +48,8 @@ const Quiz = () => {
       });
       // Store quiz score in session
       sessionStorage.setItem("quizScore", score.toString());
-      navigate("/application");
+      // Redirect to sign in instead of application
+      navigate("/signin");
     } else {
       toast.error("Unfortunately, you don't meet the eligibility criteria.", {
         description: `You scored ${score}/${quizQuestions.length}. Minimum required score is ${passScore}.`,
@@ -144,7 +145,7 @@ const Quiz = () => {
                 className="w-full"
                 variant={score >= passScore ? "default" : "outline"}
               >
-                {score >= passScore ? "Continue to Application" : "Return to Home"}
+                {score >= passScore ? "Continue to Sign In" : "Return to Home"}
               </Button>
             </CardFooter>
           </Card>

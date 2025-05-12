@@ -1,4 +1,3 @@
-
 export type LGA = 
   | "Barkin Ladi"
   | "Bassa"
@@ -51,7 +50,28 @@ export interface ApplicationForm {
 export interface User {
   id: string;
   email: string;
-  role: "admin" | "manager" | "viewer";
   name: string;
-  createdAt: Date | string;
+  role: "admin" | "manager" | "viewer";
+  authProvider?: "email" | "google"; // Added authProvider field
+  createdAt: string;
+}
+
+export interface StudentProfile extends ApplicationForm {
+  scholarshipAmount: number;
+  scholarshipType: "full" | "partial" | "merit";
+  academicYear: string;
+  disbursements: Disbursement[];
+  performanceMetrics?: {
+    cgpa: number;
+    attendance: number; // percentage
+    lastSemesterGrade: string;
+  };
+}
+
+export interface Disbursement {
+  id: string;
+  amount: number;
+  date: Date | string;
+  status: "pending" | "processed" | "completed";
+  description?: string;
 }

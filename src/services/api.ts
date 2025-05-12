@@ -1,4 +1,3 @@
-
 import { ApplicationForm, User } from "../types";
 
 // Mock API functions that would be replaced with actual API calls
@@ -47,7 +46,81 @@ export const updateApplicationStatus = async (id: string, status: "pending" | "a
   return false;
 };
 
-// Auth API
+// User Auth API
+export const registerUser = async (name: string, email: string, password: string): Promise<{ success: boolean; user?: User }> => {
+  await delay(800);
+  
+  // Check if user already exists
+  const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+  const userExists = existingUsers.find((user: User) => user.email === email);
+  
+  if (userExists) {
+    return { success: false };
+  }
+  
+  // Create new user
+  const newUser: User = {
+    id: `user_${Math.floor(Math.random() * 1000000)}`,
+    email,
+    name,
+    role: "viewer", // Default role for new users
+    createdAt: new Date().toISOString(),
+  };
+  
+  // Store password separately in a real app you'd hash this
+  localStorage.setItem(`user_pwd_${newUser.id}`, password);
+  
+  // Add to users list
+  existingUsers.push(newUser);
+  localStorage.setItem("users", JSON.stringify(existingUsers));
+  
+  return { success: true, user: newUser };
+};
+
+export const loginUser = async (email: string, password: string): Promise<{ success: boolean; user?: User }> => {
+  await delay(800);
+  
+  // Get all users
+  const users = JSON.parse(localStorage.getItem("users") || "[]");
+  const user = users.find((u: User) => u.email === email);
+  
+  if (!user) {
+    return { success: false };
+  }
+  
+  // Check password
+  const storedPassword = localStorage.getItem(`user_pwd_${user.id}`);
+  if (storedPassword !== password) {
+    return { success: false };
+  }
+  
+  return { success: true, user };
+};
+
+// Google Auth API
+export const loginWithGoogle = async (): Promise<{ success: boolean; user?: User }> => {
+  await delay(800);
+  
+  // In a real app, this would handle Google OAuth flow
+  // For mock purposes, we'll create a user with Google info
+  const googleUser: User = {
+    id: `google_${Math.floor(Math.random() * 1000000)}`,
+    email: `user${Math.floor(Math.random() * 10000)}@gmail.com`,
+    name: `Google User ${Math.floor(Math.random() * 1000)}`,
+    role: "viewer",
+    authProvider: "google",
+    createdAt: new Date().toISOString(),
+  };
+  
+  // Get existing users or create new array
+  const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+  existingUsers.push(googleUser);
+  localStorage.setItem("users", JSON.stringify(existingUsers));
+  
+  return { success: true, user: googleUser };
+};
+
+// Admin Auth API
 export const loginAdmin = async (email: string, password: string): Promise<{ success: boolean; user?: User }> => {
   await delay(800);
   // This is a mock implementation - in a real app, you'd validate against a backend
