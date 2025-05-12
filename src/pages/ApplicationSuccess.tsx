@@ -26,15 +26,18 @@ const ApplicationSuccess = () => {
 							<p className="font-medium">What happens next?</p>
 							<ol className="mt-2 text-left list-decimal pl-5 space-y-1">
 								<li>Our team will review your application and documents</li>
-								<li>If eligible, you will receive a confirmation email</li>
+								<li>If eligible, you will receive a confirmation email within 7 working days</li>
 								<li>You may be contacted for additional information or interviews</li>
 								<li>Final selection results will be announced via email and a comprehensive list will be available on the website</li>
 							</ol>
 						</div>
 					</CardContent>
-					<CardFooter>
+					<CardFooter className="flex flex-col gap-3">
 						<Link to="/" className="w-full">
 							<Button className="w-full">Return to Home</Button>
+						</Link>
+						<Link to="/gallery" className="w-full">
+							<Button variant="outline" className="w-full">View Scholarship Gallery</Button>
 						</Link>
 					</CardFooter>
 				</Card>
