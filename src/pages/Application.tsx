@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -71,6 +70,25 @@ const formSchema = z.object({
 
 const Application = () => {
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    // Check for quiz eligibility
+    const quizScore = sessionStorage.getItem("quizScore");
+    if (!quizScore) {
+      navigate("/quiz");
+      toast.error("Please complete the eligibility quiz first");
+      return;
+    }
+    
+    // Check for user authentication
+    const currentUser = sessionStorage.getItem("currentUser");
+    if (!currentUser) {
+      navigate("/signin");
+      toast.error("Please sign in to continue with your application");
+      return;
+    }
+  }, [navigate]);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [indigeneForm, setIndigeneForm] = useState<File | null>(null);
   const [admissionLetter, setAdmissionLetter] = useState<File | null>(null);

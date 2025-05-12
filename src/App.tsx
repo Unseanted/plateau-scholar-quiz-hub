@@ -9,6 +9,8 @@ import { useState } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Quiz from "./pages/Quiz";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import Application from "./pages/Application";
 import ApplicationSuccess from "./pages/ApplicationSuccess";
 import AdminLogin from "./pages/admin/Login";
@@ -34,6 +36,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/quiz" element={<Quiz />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path="/about" element={<About />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/application" element={<Application />} />
