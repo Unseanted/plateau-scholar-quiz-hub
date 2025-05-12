@@ -39,6 +39,9 @@ const ApplicationSuccess = () => {
 						<Link to="/gallery" className="w-full">
 							<Button variant="outline" className="w-full">View Scholarship Gallery</Button>
 						</Link>
+						<Link to="/students" className="w-full">
+							<Button variant="outline" className="w-full">View Student Profiles</Button>
+						</Link>
 					</CardFooter>
 				</Card>
 			</div>

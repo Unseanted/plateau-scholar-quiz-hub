@@ -17,6 +17,8 @@ import AdminUsers from "./pages/admin/Users";
 import AdminSettings from "./pages/admin/Settings";
 import About from "./components/layout/About";
 import Gallery from "./pages/Gallery";
+import StudentProfiles from "./pages/StudentProfiles";
+import StudentProfile from "./pages/StudentProfile";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,8 @@ const App = () => (
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/application" element={<Application />} />
           <Route path="/application/success" element={<ApplicationSuccess />} />
+          <Route path="/students" element={<StudentProfiles />} />
+          <Route path="/student/:id" element={<StudentProfile />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/applications" element={<AdminApplications />} />

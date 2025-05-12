@@ -55,3 +55,23 @@ export interface User {
   name: string;
   createdAt: Date | string;
 }
+
+export interface StudentProfile extends ApplicationForm {
+  scholarshipAmount: number;
+  scholarshipType: "full" | "partial" | "merit";
+  academicYear: string;
+  disbursements: Disbursement[];
+  performanceMetrics?: {
+    cgpa: number;
+    attendance: number; // percentage
+    lastSemesterGrade: string;
+  };
+}
+
+export interface Disbursement {
+  id: string;
+  amount: number;
+  date: Date | string;
+  status: "pending" | "processed" | "completed";
+  description?: string;
+}
