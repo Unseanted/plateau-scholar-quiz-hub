@@ -28,7 +28,7 @@ export const getApplications = async (): Promise<ApplicationForm[]> => {
       }
     }
   }
-  return applications;
+  return applications.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 };
 
 export const updateApplicationStatus = async (id: string, status: "pending" | "approved" | "rejected"): Promise<boolean> => {
@@ -63,8 +63,10 @@ export const registerUser = async (name: string, email: string, password: string
     id: `user_${Math.floor(Math.random() * 1000000)}`,
     email,
     name,
-    role: "viewer", // Default role for new users
+    role: "student", // Changed default role to student
     createdAt: new Date().toISOString(),
+    registrationDate: new Date().toISOString(), // Added registration date
+    status: "active" // Added status field
   };
   
   // Store password separately in a real app you'd hash this
@@ -102,14 +104,15 @@ export const loginWithGoogle = async (): Promise<{ success: boolean; user?: User
   await delay(800);
   
   // In a real app, this would handle Google OAuth flow
-  // For mock purposes, we'll create a user with Google info
   const googleUser: User = {
     id: `google_${Math.floor(Math.random() * 1000000)}`,
     email: `user${Math.floor(Math.random() * 10000)}@gmail.com`,
     name: `Google User ${Math.floor(Math.random() * 1000)}`,
-    role: "viewer",
+    role: "student",
     authProvider: "google",
     createdAt: new Date().toISOString(),
+    registrationDate: new Date().toISOString(),
+    status: "active"
   };
   
   // Get existing users or create new array
@@ -131,6 +134,8 @@ export const loginAdmin = async (email: string, password: string): Promise<{ suc
       name: "Admin User",
       role: "admin",
       createdAt: new Date().toISOString(),
+      registrationDate: new Date().toISOString(),
+      status: "active"
     };
     localStorage.setItem("currentUser", JSON.stringify(user));
     return { success: true, user };
@@ -151,14 +156,18 @@ export const getCurrentUser = (): User | null => {
 // Users API
 export const getUsers = async (): Promise<User[]> => {
   await delay(500);
-  // In a real app, this would fetch data from a backend
-  return [
+  // Get all users from localStorage
+  const users = JSON.parse(localStorage.getItem("users") || "[]");
+  // Add admin users
+  const adminUsers = [
     {
       id: "1",
       email: "admin@plateauscholarship.gov.ng",
       name: "Admin User",
       role: "admin",
       createdAt: new Date().toISOString(),
+      registrationDate: new Date().toISOString(),
+      status: "active"
     },
     {
       id: "2",
@@ -166,8 +175,14 @@ export const getUsers = async (): Promise<User[]> => {
       name: "Manager User",
       role: "manager",
       createdAt: new Date().toISOString(),
+      registrationDate: new Date().toISOString(),
+      status: "active"
     }
   ];
+  
+  return [...adminUsers, ...users].sort((a, b) => 
+    new Date(b.registrationDate).getTime() - new Date(a.registrationDate).getTime()
+  );
 };
 
 // Mock file upload function

@@ -51,9 +51,11 @@ export interface User {
   id: string;
   email: string;
   name: string;
-  role: "admin" | "manager" | "viewer";
-  authProvider?: "email" | "google"; // Added authProvider field
+  role: "admin" | "manager" | "viewer" | "student";
+  authProvider?: "email" | "google";
   createdAt: string;
+  registrationDate: string;
+  status: "active" | "inactive" | "suspended";
 }
 
 export interface StudentProfile extends ApplicationForm {
@@ -63,7 +65,7 @@ export interface StudentProfile extends ApplicationForm {
   disbursements: Disbursement[];
   performanceMetrics?: {
     cgpa: number;
-    attendance: number; // percentage
+    attendance: number;
     lastSemesterGrade: string;
   };
 }
