@@ -45,6 +45,11 @@ export interface ApplicationForm {
   status: "pending" | "approved" | "rejected";
   createdAt: Date | string;
   updatedAt: Date | string;
+  submittedAt?: Date | string;
+  academicYear?: string;
+  bankName?: string;
+  accountNumber?: string;
+  accountName?: string;
 }
 
 export interface User {

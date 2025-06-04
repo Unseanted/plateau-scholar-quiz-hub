@@ -47,6 +47,7 @@ export const ApplicationForm = () => {
         status: 'pending',
         submittedAt: new Date(),
         updatedAt: new Date(),
+        createdAt: new Date(),
       });
 
       toast.success('Application submitted successfully');

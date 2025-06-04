@@ -7,7 +7,7 @@ export const createApplication = mainApi.submitApplication;
 export const getApplication = mainApi.getApplication;
 export const updateApplicationStatus = async (
   id: string,
-  status: ApplicationStatus
+  status: "pending" | "approved" | "rejected"
 ): Promise<Application> => {
   await mainApi.updateApplicationStatus(id, status);
   return mainApi.getApplication(id);
