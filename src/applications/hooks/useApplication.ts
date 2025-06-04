@@ -1,6 +1,7 @@
+
 import { useState, useCallback } from 'react';
 import { Application, ApplicationStatus } from '../types';
-import * as api from '../api';
+import { getApplication, updateApplicationStatus as updateStatus, uploadApplicationDocument } from '../api';
 
 export const useApplication = (applicationId?: string) => {
   const [loading, setLoading] = useState(false);
@@ -14,7 +15,7 @@ export const useApplication = (applicationId?: string) => {
     setError(null);
 
     try {
-      const data = await api.getApplication(applicationId);
+      const data = await getApplication(applicationId);
       setApplication(data);
     } catch (err) {
       setError(err instanceof Error ? err : new Error('Failed to fetch application'));
@@ -23,14 +24,14 @@ export const useApplication = (applicationId?: string) => {
     }
   }, [applicationId]);
 
-  const updateStatus = useCallback(async (status: ApplicationStatus) => {
+  const updateApplicationStatus = useCallback(async (status: ApplicationStatus) => {
     if (!applicationId) return;
 
     setLoading(true);
     setError(null);
 
     try {
-      const updatedApplication = await api.updateApplicationStatus(applicationId, status);
+      const updatedApplication = await updateStatus(applicationId, status);
       setApplication(updatedApplication);
       return updatedApplication;
     } catch (err) {
@@ -48,7 +49,7 @@ export const useApplication = (applicationId?: string) => {
     setError(null);
 
     try {
-      const documentUrl = await api.uploadApplicationDocument(applicationId, type, file);
+      const documentUrl = await uploadApplicationDocument(applicationId, type, file);
       return documentUrl;
     } catch (err) {
       setError(err instanceof Error ? err : new Error('Failed to upload document'));
@@ -63,7 +64,7 @@ export const useApplication = (applicationId?: string) => {
     loading,
     error,
     fetchApplication,
-    updateStatus,
+    updateStatus: updateApplicationStatus,
     uploadDocument,
   };
 };

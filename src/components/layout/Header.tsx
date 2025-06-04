@@ -3,7 +3,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import PlateauLogo from "../PlateauLogo";
-import { Analytics } from "@vercel/analytics/next";
 
 const Header = () => {
   return (
@@ -17,6 +16,9 @@ const Header = () => {
           <Link to="/" className="text-sm font-medium hover:text-primary">
             Home
           </Link>
+          <Link to="/students" className="text-sm font-medium hover:text-primary">
+            Students
+          </Link>
           <Link to="/gallery" className="text-sm font-medium hover:text-primary">
             Gallery
           </Link>
@@ -26,9 +28,6 @@ const Header = () => {
           <Link to="/about" className="text-sm font-medium hover:text-primary">
             About
           </Link>
-          {/* <Link to="/contact" className="text-sm font-medium hover:text-primary">
-            Contact
-          </Link> */}
         </nav>
         <div className="flex items-center gap-4">
           <Link to="/quiz">
