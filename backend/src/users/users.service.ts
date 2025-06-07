@@ -31,6 +31,10 @@ export class UsersService {
     return createdUser.save();
   }
 
+  async findAll(): Promise<User[]> {
+    return this.userModel.find().select('-password').exec();
+  }
+
   async findByEmail(email: string): Promise<User> {
     const user = await this.userModel.findOne({ email });
     if (!user) {
@@ -40,7 +44,7 @@ export class UsersService {
   }
 
   async findById(id: string): Promise<User> {
-    const user = await this.userModel.findById(id);
+    const user = await this.userModel.findById(id).select('-password');
     if (!user) {
       throw new NotFoundException('User not found');
     }
@@ -49,5 +53,24 @@ export class UsersService {
 
   async findByGoogleId(googleId: string): Promise<User> {
     return this.userModel.findOne({ googleId });
+  }
+
+  async update(id: string, updateData: Partial<CreateUserDto>): Promise<User> {
+    const updatedUser = await this.userModel
+      .findByIdAndUpdate(id, updateData, { new: true })
+      .select('-password')
+      .exec();
+
+    if (!updatedUser) {
+      throw new NotFoundException('User not found');
+    }
+    return updatedUser;
+  }
+
+  async remove(id: string): Promise<void> {
+    const result = await this.userModel.findByIdAndDelete(id).exec();
+    if (!result) {
+      throw new NotFoundException('User not found');
+    }
   }
 }

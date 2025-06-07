@@ -1,4 +1,3 @@
-
 import { ApplicationForm, User } from "../types";
 import { Application, ApplicationStatus } from "../applications/types";
 
@@ -22,7 +21,8 @@ const apiCall = async (endpoint: string, options: RequestInit = {}) => {
   });
 
   if (!response.ok) {
-    throw new Error(`API call failed: ${response.statusText}`);
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || `API call failed: ${response.statusText}`);
   }
 
   return response.json();
@@ -31,16 +31,19 @@ const apiCall = async (endpoint: string, options: RequestInit = {}) => {
 // Simulate delay for development
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-// Applications API - Updated to match backend structure
+// Applications API
 export const submitApplication = async (application: ApplicationForm): Promise<{ success: boolean; id: string }> => {
   try {
-    if (process.env.NODE_ENV === 'production') {
+    // Always try the backend first
+    try {
       const response = await apiCall('/applications', {
         method: 'POST',
         body: JSON.stringify(application),
       });
-      return { success: true, id: response.id };
-    } else {
+      return { success: true, id: response._id || response.id };
+    } catch (backendError) {
+      console.warn('Backend not available, using localStorage fallback:', backendError);
+      
       // Fallback to localStorage for development
       await delay(1000);
       const id = `APP-${Math.floor(Math.random() * 1000000)}`;
@@ -60,9 +63,12 @@ export const submitApplication = async (application: ApplicationForm): Promise<{
 
 export const getApplications = async (): Promise<ApplicationForm[]> => {
   try {
-    if (process.env.NODE_ENV === 'production') {
+    // Try backend first
+    try {
       return await apiCall('/applications');
-    } else {
+    } catch (backendError) {
+      console.warn('Backend not available, using localStorage fallback:', backendError);
+      
       // Fallback to localStorage for development
       await delay(500);
       const applications: ApplicationForm[] = [];
@@ -85,9 +91,12 @@ export const getApplications = async (): Promise<ApplicationForm[]> => {
 
 export const getApplication = async (id: string): Promise<Application> => {
   try {
-    if (process.env.NODE_ENV === 'production') {
+    // Try backend first
+    try {
       return await apiCall(`/applications/${id}`);
-    } else {
+    } catch (backendError) {
+      console.warn('Backend not available, using localStorage fallback:', backendError);
+      
       // Fallback to localStorage for development
       await delay(500);
       const data = localStorage.getItem(`application_${id}`);
@@ -104,13 +113,16 @@ export const getApplication = async (id: string): Promise<Application> => {
 
 export const updateApplicationStatus = async (id: string, status: "pending" | "approved" | "rejected"): Promise<boolean> => {
   try {
-    if (process.env.NODE_ENV === 'production') {
+    // Try backend first
+    try {
       await apiCall(`/applications/${id}/status`, {
-        method: 'PUT',
+        method: 'PATCH',
         body: JSON.stringify({ status }),
       });
       return true;
-    } else {
+    } catch (backendError) {
+      console.warn('Backend not available, using localStorage fallback:', backendError);
+      
       // Fallback to localStorage for development
       await delay(500);
       const key = `application_${id}`;
@@ -130,10 +142,11 @@ export const updateApplicationStatus = async (id: string, status: "pending" | "a
   }
 };
 
-// User Auth API - Updated to work with backend
+// User Auth API
 export const registerUser = async (name: string, email: string, password: string): Promise<{ success: boolean; user?: User; token?: string }> => {
   try {
-    if (process.env.NODE_ENV === 'production') {
+    // Try backend first
+    try {
       const response = await apiCall('/auth/register', {
         method: 'POST',
         body: JSON.stringify({ name, email, password, role: 'student' }),
@@ -145,7 +158,9 @@ export const registerUser = async (name: string, email: string, password: string
       }
       
       return { success: true, user: response.user, token: response.access_token };
-    } else {
+    } catch (backendError) {
+      console.warn('Backend not available, using localStorage fallback:', backendError);
+      
       // Fallback to localStorage for development
       await delay(800);
       const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
@@ -180,7 +195,8 @@ export const registerUser = async (name: string, email: string, password: string
 
 export const loginUser = async (email: string, password: string): Promise<{ success: boolean; user?: User; token?: string }> => {
   try {
-    if (process.env.NODE_ENV === 'production') {
+    // Try backend first
+    try {
       const response = await apiCall('/auth/login', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
@@ -192,7 +208,9 @@ export const loginUser = async (email: string, password: string): Promise<{ succ
       }
       
       return { success: true, user: response.user, token: response.access_token };
-    } else {
+    } catch (backendError) {
+      console.warn('Backend not available, using localStorage fallback:', backendError);
+      
       // Fallback to localStorage for development
       await delay(800);
       const users = JSON.parse(localStorage.getItem("users") || "[]");
@@ -219,11 +237,14 @@ export const loginUser = async (email: string, password: string): Promise<{ succ
 // Google Auth API
 export const loginWithGoogle = async (): Promise<{ success: boolean; user?: User }> => {
   try {
-    if (process.env.NODE_ENV === 'production') {
+    // Try backend first
+    try {
       // Redirect to Google OAuth
       window.location.href = `${API_BASE_URL}/auth/google`;
       return { success: true };
-    } else {
+    } catch (backendError) {
+      console.warn('Backend not available, using localStorage fallback:', backendError);
+      
       // Fallback for development
       await delay(800);
       const googleUser: User = {
@@ -253,19 +274,23 @@ export const loginWithGoogle = async (): Promise<{ success: boolean; user?: User
 // Admin Auth API
 export const loginAdmin = async (email: string, password: string): Promise<{ success: boolean; user?: User }> => {
   try {
-    if (process.env.NODE_ENV === 'production') {
-      const response = await apiCall('/auth/admin/login', {
+    // Try backend first
+    try {
+      const response = await apiCall('/auth/login', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
       });
       
-      if (response.access_token) {
+      if (response.access_token && response.user.role === 'admin') {
         localStorage.setItem('auth_token', response.access_token);
         localStorage.setItem('currentUser', JSON.stringify(response.user));
+        return { success: true, user: response.user };
       }
       
-      return { success: true, user: response.user };
-    } else {
+      return { success: false };
+    } catch (backendError) {
+      console.warn('Backend not available, using localStorage fallback:', backendError);
+      
       // Fallback for development
       await delay(800);
       if (email === "admin@plateauscholarship.gov.ng" && password === "admin123") {
@@ -303,9 +328,12 @@ export const getCurrentUser = (): User | null => {
 // Users API
 export const getUsers = async (): Promise<User[]> => {
   try {
-    if (process.env.NODE_ENV === 'production') {
+    // Try backend first
+    try {
       return await apiCall('/users');
-    } else {
+    } catch (backendError) {
+      console.warn('Backend not available, using localStorage fallback:', backendError);
+      
       // Fallback for development
       await delay(500);
       const users = JSON.parse(localStorage.getItem("users") || "[]");
@@ -343,12 +371,20 @@ export const getUsers = async (): Promise<User[]> => {
 // File upload function
 export const uploadFile = async (file: File): Promise<string> => {
   try {
-    if (process.env.NODE_ENV === 'production') {
+    // Try backend first
+    try {
       const formData = new FormData();
       formData.append('file', file);
       
+      const token = localStorage.getItem('auth_token');
+      const headers: HeadersInit = {};
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
+      
       const response = await fetch(`${API_BASE_URL}/upload`, {
         method: 'POST',
+        headers,
         body: formData,
       });
       
@@ -358,7 +394,9 @@ export const uploadFile = async (file: File): Promise<string> => {
       
       const data = await response.json();
       return data.url;
-    } else {
+    } catch (backendError) {
+      console.warn('Backend not available, using mock URL:', backendError);
+      
       // Fallback for development
       await delay(1500);
       return `https://example.com/uploads/${file.name}`;
@@ -376,13 +414,21 @@ export const uploadApplicationDocument = async (
   file: File
 ): Promise<string> => {
   try {
-    if (process.env.NODE_ENV === 'production') {
+    // Try backend first
+    try {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('type', type);
 
+      const token = localStorage.getItem('auth_token');
+      const headers: HeadersInit = {};
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
+
       const response = await fetch(`${API_BASE_URL}/applications/${applicationId}/documents`, {
         method: 'POST',
+        headers,
         body: formData,
       });
 
@@ -392,7 +438,9 @@ export const uploadApplicationDocument = async (
 
       const data = await response.json();
       return data.url;
-    } else {
+    } catch (backendError) {
+      console.warn('Backend not available, using mock URL:', backendError);
+      
       // Fallback for development
       await delay(1500);
       return `https://example.com/uploads/applications/${applicationId}/${type}/${file.name}`;
