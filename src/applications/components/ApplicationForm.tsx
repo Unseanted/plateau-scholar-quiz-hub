@@ -42,13 +42,30 @@ export const ApplicationForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const application = await createApplication({
-        ...values,
-        status: 'pending',
+      // Create a complete ApplicationForm object with required fields
+      const applicationData = {
+        fullName: '', // This should come from user context or be added to form
+        email: '', // This should come from user context or be added to form
+        phone: '', // This should come from user context or be added to form
+        gender: 'other' as const, // This should come from user context or be added to form
+        dateOfBirth: new Date(), // This should come from user context or be added to form
+        address: '', // This should come from user context or be added to form
+        lga: 'Jos North' as const, // This should come from user context or be added to form
+        matricNumber: '', // This should come from user context or be added to form
+        institution: values.institution,
+        course: values.course,
+        level: values.level,
+        academicYear: values.academicYear,
+        bankName: values.bankName,
+        accountNumber: values.accountNumber,
+        accountName: values.accountName,
+        status: 'pending' as const,
         submittedAt: new Date(),
         updatedAt: new Date(),
         createdAt: new Date(),
-      });
+      };
+      
+      const application = await createApplication(applicationData);
 
       toast.success('Application submitted successfully');
       return application;

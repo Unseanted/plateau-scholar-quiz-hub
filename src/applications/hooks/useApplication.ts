@@ -1,6 +1,6 @@
 
 import { useState, useCallback } from 'react';
-import { Application, ApplicationStatus } from '../types';
+import { Application } from '../types';
 import { getApplication, updateApplicationStatus as updateStatus, uploadApplicationDocument } from '../api';
 
 export const useApplication = (applicationId?: string) => {
@@ -24,7 +24,7 @@ export const useApplication = (applicationId?: string) => {
     }
   }, [applicationId]);
 
-  const updateApplicationStatus = useCallback(async (status: ApplicationStatus) => {
+  const updateApplicationStatus = useCallback(async (status: 'pending' | 'approved' | 'rejected') => {
     if (!applicationId) return;
 
     setLoading(true);
